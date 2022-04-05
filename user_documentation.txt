@@ -1,0 +1,71 @@
+User Documentation
+
+Task 1 (FCFS)
+Assumption: That the number of seconds needed to run all the processes provided is at maximum 1 million
+Assumption: If two processes have the same entry time, the one written first in the file will run first.
+Assumption: Wait time is the time between entry time and getting served for the first time.Usage (SRTN)
+1. Ensure processes.txt, pcb_t.h and storage.h is in same directory as task1-29694736.c
+2. Type in the directory terminal gcc -o 1 task1-29694736.c and enter
+3. Type ./1 if you want to run processes.txt using fcfs OR ./1 file.txt if you want to run file.txt using fcfs
+4. Results will be printed to the terminal and output file to the current directory.
+
+
+Task 2
+Assumption: That the number of seconds needed to run all the processes provided is at maximum 1 million
+Assumption: If two processes have the same remaining time, the one written first in the file will be run first.
+Assumption: Wait time is the time between entry time and getting served for the first time.
+
+Usage:
+1. Ensure processes.txt, pcb_t.h and storage.h is in same directory as task2-29694736.c
+2. Type in the directory terminal gcc -o 2 task2-29694736.c and enter
+3. Type ./2 if you want to run processes.txt using srtn OR ./2 file.txt if you want to run file.txt using srtn
+4. Results will be printed to the terminal and output file to the current directory.
+
+
+Task 3
+Algorithm:
+The algorithm I created is a preemptive process scheduling method.
+It works similar to shortest remaining time method with a time quantum of 1. However, instead of calculating the shortest remaining time left for a process, it calculates the shortest remaining deadline out of all the ready processes that can meet their deadlines. Using this data, it runs the first process that has the shortest remaining achievable deadline, and leaves all processes that can't achieve their deadline when there is no other competition. As such, processes which are able to meet their deadlines are prioritised over those which are not able to, increasing the number of processes that meet their deadline.
+
+Assumption: That the number of seconds needed to run all the processes provided is at maximum 1 million
+Assumption: If two processes have the same remaining deadline, the one written first in the file will be run first.
+Assumption: Wait time is the time between entry time and getting served for the first time.
+
+Usage:
+1. Ensure processes.txt, pcb_t.h and storage.h is in same directory as task3-29694736.c
+2. Type in the directory terminal gcc -o 3 task3-29694736.c and enter
+3. Type ./3 if you want to run processes.txt using dbs OR ./3 file.txt if you want to run file.txt using dbs.
+4. Results will be printed to the terminal and output file to the current directory.
+
+Example:
+For the example given in the assignment specifications where:
+P1 0 3 5
+P2 1 6 7 
+P3 4 4 6
+P4 6 2 2
+
+Time 0: P1 runs - no competition
+Time 1: P1 runs (now 2 remaining service time, 4 remaining deadline time)- beats P2  whose remaining deadline time is 7
+Time 2: P1 runs (1 remaining service time, 3 remaining deadline time)- beats P2  whose remaining deadline time is 6
+Time 3: P1 terminates (0 remaining service time)
+Time 3: P2 runs (6 remaining service time, 5 remaining deadline time)- no competition
+Time 4: P3 runs (4 remaining service time, 6 remaining deadline time)- beats P2 whose can no longer meet its deadline
+Time 5: P3 runs (3 remaining service time, 5 remaining deadline time)- beats P2 whose can no longer meet its deadline
+Time 6: P4 runs (2 remaining service time, 2 remaining deadline time) - beats beats P2 whose can no longer meet its deadline and P3 whose remaining deadline time is 4
+Time 7: P4 runs (1 remaining service time, 1 remaining deadline time) - beats beats P2 whose can no longer meet its deadline and P3 whose remaining deadline time is 3
+Time 8: P4 terminates (0 remaining service time)
+Time 8: P3 runs (2 remaining service time, 2 remaining deadline time)- beats P2 whose can no longer meet its deadline
+Time 9: P3 runs (1 remaining service time, 1 remaining deadline time)- beats P2 whose can no longer meet its deadline
+Time 10: P3 terminates (0 remaining service time)
+Time 11: P2 runs(4 remaining service time) - no competition
+Time 12: P2 runs(3 remaining service time) - no competition
+Time 13: P2 runs(2 remaining service time) - no competition
+Time 14: P2 runs(1 remaining service time) - no competition
+Time 15L P2 terminates
+
+
+Outcome: 3/4 deadlines met- more than any of the previous methods
+P1 0 3 1
+P2 2 14 0
+P3 0 6 1
+P4 0 2 1
